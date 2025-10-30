@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HE Coffee — Quán cà phê thân mật ở gần bạn</title>
+  <meta name="description" content="HE Coffee • Cà phê rang xay, đồ uống trái cây, bánh ngọt. Không gian ấm áp cho học tập & gặp gỡ." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Crect width='128' height='128' rx='24' fill='%232b1c17'/%3E%3Cpath d='M28 36h48a16 16 0 0 1 0 32H40a12 12 0 0 0 0 24h32a20 20 0 0 0 20-20' fill='none' stroke='%23f2e6d9' stroke-width='10' stroke-linecap='round'/%3E%3Ctext x='64' y='72' text-anchor='middle' font-size='44' font-family='Segoe UI, system-ui, sans-serif' fill='%23f2e6d9'%3EHE%3C/text%3E%3C/svg%3E" />
+  <style>
+    :root{
+      --bg:#faf7f2;         /* nền kem nhẹ */
+      --paper:#fffaf3;      /* thẻ */
+      --ink:#2b1c17;        /* nâu đen */
+      --sub:#6b4f43;        /* nâu nhạt */
+      --brand:#c07a44;      /* caramel */
+      --brand-2:#e0a872;    /* caramel sáng */
+      --ring: rgba(192,122,68,.35);
+      --radius:16px;
+      --shadow:0 10px 25px rgba(43,28,23,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color:var(--ink);
+      background: radial-gradient(1200px 600px at 80% -10%, #fff5e8 0%, transparent 55%) , var(--bg);
+      line-height:1.6;
+    }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{opacity:.9}
+    .container{width:min(1100px, 92%); margin-inline:auto}
+
+    /* Header */
+    header{position:sticky; top:0; z-index:50; backdrop-filter:saturate(1.2) blur(6px)}
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0; border-bottom:1px solid #efe6dc; background:rgba(250,247,242,.7)
+    }
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.5px}
+    .brand-logo{width:36px; height:36px; border-radius:9px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); display:grid; place-items:center; color:white; font-weight:900}
+    .nav ul{display:flex; gap:18px; list-style:none; margin:0; padding:0}
+    .nav a{padding:8px 12px; border-radius:10px}
+    .btn{display:inline-block; padding:10px 16px; border-radius:12px; background:var(--ink); color:#fff; box-shadow:var(--shadow)}
+    .btn:hover{transform:translateY(-1px)}
+    .menu-toggle{display:none}
+
+    /* Hero */
+    .hero{display:grid; grid-template-columns: 1.2fr .8fr; gap:28px; align-items:center; padding:42px 0}
+    .hero-card{background:linear-gradient(180deg, #fffaf3, #fff) ; border:1px solid #efe6dc; border-radius:var(--radius); box-shadow:var(--shadow); padding:28px}
+    .hero h1{font-size: clamp(28px, 4vw, 44px); line-height:1.15; margin:0 0 10px}
+    .hero p{color:var(--sub); margin:0 0 18px}
+    .badge{display:inline-block; padding:6px 10px; border-radius:999px; background:#fff; border:1px solid #ecdccd; color:var(--sub); font-size:12px}
+    .hero-side{display:grid; gap:14px}
+    .tile{background:var(--paper); border:1px solid #efe6dc; border-radius:14px; padding:16px; box-shadow:var(--shadow)}
+
+    /* Menu grid */
+    .section{padding:54px 0}
+    .section h2{font-size: clamp(22px, 2.6vw, 34px); margin:0 0 8px}
+    .section .sub{color:var(--sub); margin:0 0 24px}
+    .grid{display:grid; grid-template-columns: repeat(3, 1fr); gap:18px}
+    .card{background:var(--paper); border:1px solid #efe6dc; border-radius:14px; padding:16px; box-shadow:var(--shadow); display:flex; gap:14px}
+    .card img{width:82px; height:82px; border-radius:12px; object-fit:cover}
+    .price{margin-left:auto; font-weight:700; color:var(--brand)}
+
+    /* About + Hours */
+    .about{display:grid; grid-template-columns: 1fr 1fr; gap:24px}
+    .note{background:#fff; border:2px dashed #e9d7c8; border-radius:14px; padding:16px}
+    .hours{border:1px solid #efe6dc; border-radius:14px; padding:16px; background:var(--paper)}
+    .hours ul{list-style:none; padding:0; margin:0}
+    .hours li{display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed #efe6dc}
+    .hours li:last-child{border:none}
+
+    /* Contact */
+    form{display:grid; gap:12px}
+    input, textarea{width:100%; padding:12px 14px; border:1px solid #e7dacb; border-radius:12px; background:#fff}
+    input:focus, textarea:focus{outline:3px solid var(--ring); border-color:var(--brand-2)}
+
+    footer{margin-top:36px; border-top:1px solid #efe6dc; padding:20px 0; color:#957b6a}
+
+    /* Mobile */
+    @media (max-width: 860px){
+      .hero{grid-template-columns: 1fr;}
+      .grid{grid-template-columns: 1fr 1fr}
+      .about{grid-template-columns: 1fr}
+      .nav ul{display:none}
+      .menu-toggle{display:inline-flex; align-items:center; gap:8px; background:#fff; border:1px solid #ecdccd; padding:8px 10px; border-radius:10px}
+      .nav.open ul{display:flex; flex-direction:column; padding:10px 0}
+    }
+    @media (max-width: 520px){
+      .grid{grid-template-columns: 1fr}
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container nav" id="topNav">
+      <div class="brand">
+        <div class="brand-logo">HE</div>
+        <span>HE Coffee</span>
+      </div>
+      <button class="menu-toggle" aria-label="Mở menu" onclick="toggleMenu()">☰ Menu</button>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#about">Giới thiệu</a></li>
+        <li><a href="#contact">Liên hệ</a></li>
+        <li><a class="btn" href="tel:+84999999999">Gọi đặt món</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main class="container hero">
+    <section class="hero-card">
+      <span class="badge">☕ Freshly Brewed • Since 2025</span>
+      <h1>Không gian ấm áp cho một ngày đầy cảm hứng</h1>
+      <p>HE Coffee phục vụ cà phê rang xay mỗi ngày, đồ uống trái cây tươi và bánh ngọt thủ công. Ngồi học, làm việc, hay gặp gỡ bạn bè — luôn có chỗ cho bạn.</p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap">
+        <a class="btn" href="#menu">Xem menu</a>
+        <a class="btn" style="background:var(--brand);" href="#contact">Đặt bàn</a>
+      </div>
+    </section>
+
+    <aside class="hero-side">
+      <div class="tile">
+        <strong>Ưu đãi hôm nay</strong>
+        <p style="margin:6px 0 0">Mua 2 tặng 1 cho <em>Cold Brew</em> (9:00–11:00).</p>
+      </div>
+      <div class="tile">
+        <strong>Wi‑Fi & Ổ cắm</strong>
+        <p style="margin:6px 0 0">Làm việc cả ngày với wifi mạnh và nhiều ổ cắm tiện lợi.</p>
+      </div>
+      <div class="tile">
+        <strong>Âm nhạc nhẹ nhàng</strong>
+        <p style="margin:6px 0 0">Playlist acoustic & jazz cho buổi sáng tràn năng lượng.</p>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Menu -->
+  <section id="menu" class="section container">
+    <h2>Menu nổi bật</h2>
+    <p class="sub">Giá đã bao gồm thuế. Tuỳ chọn đường/đá theo sở thích.</p>
+    <div class="grid">
+      <article class="card">
+        <img alt="Ly cà phê latte" src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=300&auto=format&fit=crop" />
+        <div>
+          <strong>Latte</strong>
+          <div style="font-size:14px;color:var(--sub)">Sữa mịn, vị cân bằng</div>
+        </div>
+        <div class="price">45k</div>
+      </article>
+      <article class="card">
+        <img alt="Ly cold brew" src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=300&auto=format&fit=crop" />
+        <div>
+          <strong>Cold Brew</strong>
+          <div style="font-size:14px;color:var(--sub)">Hậu vị ngọt, ít đắng</div>
+        </div>
+        <div class="price">49k</div>
+      </article>
+      <article class="card">
+        <img alt="Ly trà đào" src="https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=300&auto=format&fit=crop" />
+        <div>
+          <strong>Trà Đào Cam Sả</strong>
+          <div style="font-size:14px;color:var(--sub)">Thơm mát, giải nhiệt</div>
+        </div>
+        <div class="price">39k</div>
+      </article>
+    </div>
+  </section>
+
+  <!-- About & Hours -->
+  <section id="about" class="section container about">
+    <div>
+      <h2>Về HE Coffee</h2>
+      <p class="sub">Chúng tôi tin vào hạt cà phê tốt, nước sạch, và nụ cười chân thành.</p>
+      <div class="note">
+        <strong>Hạt rang nhỏ lẻ</strong>
+        <p style="margin:6px 0 0">Nguồn cung từ nông trại Đà Lạt & Buôn Ma Thuột. Rang mẻ nhỏ để giữ hương.</p>
+      </div>
+    </div>
+    <div class="hours">
+      <h3 style="margin-top:0">Giờ mở cửa</h3>
+      <ul>
+        <li><span>Thứ 2–Thứ 6</span><span>07:00 – 21:30</span></li>
+        <li><span>Thứ 7</span><span>08:00 – 22:00</span></li>
+        <li><span>Chủ nhật</span><span>08:00 – 21:00</span></li>
+      </ul>
+      <p id="openState" style="margin:10px 0 0; font-weight:600"></p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section container">
+    <h2>Liên hệ & Đặt bàn</h2>
+    <p class="sub">📍 123 Đường Cà Phê, Quận 1, TP.HCM • 📞 0999 999 999 • ✉️ hecoffee@example.com</p>
+    <form onsubmit="event.preventDefault(); alert('Cảm ơn bạn! Chúng tôi sẽ liên hệ sớm.'); this.reset();">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px">
+        <input required placeholder="Họ và tên" />
+        <input required type="tel" placeholder="Số điện thoại" />
+      </div>
+      <textarea rows="4" placeholder="Ghi chú (ví dụ: 4 người, 19:00 tối nay)"></textarea>
+      <button class="btn" type="submit">Gửi yêu cầu</button>
+    </form>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap">
+      <small>© <span id="year"></span> HE Coffee. All rights reserved.</small>
+      <small>Facebook • Instagram • TikTok</small>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const toggleMenu = () => document.getElementById('topNav').classList.toggle('open');
+
+    // Dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Simple "open now" indicator (local time)
+    (function(){
+      const now = new Date();
+      const day = now.getDay(); // 0 Sun ... 6 Sat
+      const h = now.getHours() + now.getMinutes()/60;
+      let open = false;
+      if(day>=1 && day<=5){ // Mon-Fri 7:00-21:30
+        open = h >= 7 && h <= 21.5;
+      }else if(day===6){    // Sat 8:00-22:00
+        open = h >= 8 && h <= 22;
+      }else{                // Sun 8:00-21:00
+        open = h >= 8 && h <= 21;
+      }
+      const el = document.getElementById('openState');
+      if(el) el.textContent = open ? '🟢 Đang mở cửa — mời bạn ghé!' : '🔴 Hiện đang đóng — hẹn gặp bạn khung giờ mở cửa.';
+    })();
+  </script>
+</body>
+</html>
